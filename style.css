@@ -1,0 +1,204 @@
+:root {
+  --page: #f5f7f9;
+  --panel: #ffffff;
+  --result: #fff0d8;
+  --text: #151515;
+  --muted: #4f5965;
+  --accent: #f26a00;
+  --accent-dark: #d95000;
+  --border: #e4e7eb;
+  --shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--page);
+  color: var(--text);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  line-height: 1.42;
+}
+
+.page {
+  max-width: 1100px;
+  margin: 24px auto 64px;
+  padding: 0 18px;
+}
+
+.search-panel {
+  background: var(--panel);
+  border-radius: 3px;
+  box-shadow: var(--shadow);
+  padding: 28px 38px;
+}
+
+h1 {
+  margin: 0 0 16px;
+  font-size: 24px;
+}
+
+h2 {
+  margin: 22px 0 10px;
+  font-size: 26px;
+  font-weight: 500;
+}
+
+.search-form {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 20px 80px;
+  align-items: start;
+}
+
+.field,
+.checkbox-field {
+  display: grid;
+  gap: 8px;
+  color: #263242;
+  font-weight: 700;
+}
+
+.field input {
+  width: 100%;
+  height: 46px;
+  border: 1px solid #8a95a3;
+  border-radius: 4px;
+  padding: 8px 14px;
+  font: inherit;
+  font-size: 20px;
+}
+
+.checkbox-field input {
+  width: 29px;
+  height: 29px;
+  margin: 0;
+  appearance: none;
+  border: 2px solid #a4a4a4;
+  border-radius: 3px;
+  background: #fff;
+}
+
+.checkbox-field input:checked {
+  background:
+    linear-gradient(45deg, transparent 45%, #fff 45% 55%, transparent 55%),
+    linear-gradient(-45deg, transparent 40%, #fff 40% 55%, transparent 55%),
+    var(--accent);
+  border-color: var(--accent);
+}
+
+.actions {
+  grid-column: 1 / -1;
+  display: flex;
+  gap: 6px;
+}
+
+button {
+  border: 1px solid var(--accent);
+  border-radius: 5px;
+  background: var(--accent);
+  color: #fff;
+  cursor: pointer;
+  font: inherit;
+  font-size: 20px;
+  font-weight: 700;
+  padding: 10px 18px;
+}
+
+button:hover {
+  background: var(--accent-dark);
+  border-color: var(--accent-dark);
+}
+
+button.secondary {
+  background: #fff;
+  color: var(--accent);
+}
+
+button.secondary:hover {
+  background: #fff7f0;
+  color: var(--accent-dark);
+}
+
+.dataset-card {
+  background: var(--result);
+  border: 1px solid #f8dfba;
+  border-radius: 8px;
+  padding: 18px 38px 38px;
+}
+
+.dataset-card + .dataset-card {
+  margin-top: 16px;
+}
+
+.dataset-card h3 {
+  margin: 0 0 18px;
+  color: var(--accent);
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.dataset-summary {
+  margin-bottom: 24px;
+  font-size: 20px;
+}
+
+.dataset-summary p {
+  margin: 0;
+}
+
+.file-list {
+  display: grid;
+  gap: 24px;
+}
+
+.file-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  padding: 10px;
+}
+
+.file-card a {
+  color: var(--accent);
+  font-size: 20px;
+  text-decoration: underline;
+}
+
+.file-card p {
+  margin: 2px 0 0;
+  font-size: 18px;
+}
+
+.empty,
+.error {
+  margin: 0;
+  color: var(--muted);
+  font-size: 18px;
+}
+
+.error {
+  color: #9f1d1d;
+}
+
+@media (max-width: 760px) {
+  .search-panel {
+    padding: 22px;
+  }
+
+  .search-form {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .actions {
+    grid-column: auto;
+  }
+
+  .dataset-card {
+    padding: 18px;
+  }
+}
+
