@@ -27,3 +27,26 @@ Then open:
 http://localhost:8000
 ```
 
+Search for `Mg` to see the included NIST and Kurucz sample datasets. Tick
+`All ionization stages?` to include `Mg_p` / Mg II.
+
+## Validation
+
+```bash
+node --check app.js
+node scripts/validate-data.js
+```
+
+## Adding a Dataset
+
+Add the processed files into `data/`:
+
+```text
+<AtomSlug>__<Dataset>.states
+<AtomSlug>__<Dataset>.trans
+<AtomSlug>__<Dataset>.pf
+<AtomSlug>__<Dataset>.adef.json
+```
+
+Then add the dataset entry to `exoatom.all.json`. The website will pick it up
+automatically on refresh.
