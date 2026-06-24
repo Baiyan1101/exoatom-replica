@@ -1,0 +1,47 @@
+{
+  "ExoAtom": {
+    "ID": "exoatom.all.json",
+    "version": "20260624"
+  },
+  "atoms": [
+    {
+      "name": "Magnesium",
+      "formula": "Mg",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Mg",
+          "iso_formula": "Mg",
+          "dataset": "NIST",
+          "version": 20240601
+        },
+        {
+          "iso_slug": "Mg",
+          "iso_formula": "Mg",
+          "dataset": "Kurucz",
+          "version": 20240115
+        }
+      ]
+    },
+    {
+      "name": "Magnesium Ion (II)",
+      "formula": "Mg_p",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Mg_p",
+          "iso_formula": "Mg+",
+          "dataset": "NIST",
+          "version": 20240601
+        },
+        {
+          "iso_slug": "Mg_p",
+          "iso_formula": "Mg+",
+          "dataset": "Kurucz",
+          "version": 20240115
+        }
+      ]
+    }
+  ]
+}
+
