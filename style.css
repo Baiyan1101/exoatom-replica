@@ -2,8 +2,8 @@
   --page: #f5f7f9;
   --panel: #ffffff;
   --result: #fff0d8;
-  --text: #151515;
-  --muted: #4f5965;
+  --text: #141414;
+  --muted: #5a6370;
   --accent: #f26a00;
   --accent-dark: #d95000;
   --border: #e4e7eb;
@@ -24,33 +24,49 @@ body {
 }
 
 .page {
-  max-width: 1100px;
-  margin: 24px auto 64px;
+  max-width: 1120px;
+  margin: 52px auto 64px;
   padding: 0 18px;
+}
+
+.page-header {
+  margin: 0 auto 48px;
+  max-width: 640px;
+}
+
+.page-header h1 {
+  margin: 0 0 46px;
+  text-align: center;
+  font-size: 31px;
+  font-weight: 500;
+}
+
+.page-header p {
+  margin: 0;
+  font-size: 22px;
 }
 
 .search-panel {
   background: var(--panel);
   border-radius: 3px;
   box-shadow: var(--shadow);
-  padding: 28px 38px;
+  margin: 0 auto 20px;
+  max-width: 1088px;
+  padding: 28px 38px 40px;
 }
 
-h1 {
-  margin: 0 0 16px;
-  font-size: 24px;
-}
-
-h2 {
-  margin: 22px 0 10px;
-  font-size: 26px;
-  font-weight: 500;
+.search-panel h2 {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
 }
 
 .search-form {
   display: grid;
   grid-template-columns: 260px 1fr;
-  gap: 20px 80px;
+  gap: 20px 76px;
   align-items: start;
 }
 
@@ -123,6 +139,94 @@ button.secondary:hover {
   color: var(--accent-dark);
 }
 
+.results h2,
+.periodic-section h2,
+.species-section h2 {
+  margin: 18px 0 18px;
+  font-size: 22px;
+  font-weight: 500;
+}
+
+.periodic-table {
+  display: grid;
+  grid-template-columns: repeat(18, minmax(44px, 1fr));
+  grid-template-rows: repeat(9, 62px);
+  gap: 7px;
+  overflow-x: auto;
+  padding-bottom: 6px;
+}
+
+.element-tile {
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  min-width: 44px;
+  height: 62px;
+  border: 1px solid #f6c79b;
+  border-radius: 4px;
+  background: #fff;
+  color: var(--accent);
+  padding: 4px;
+  text-align: center;
+}
+
+.element-tile span {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.element-tile small {
+  max-width: 100%;
+  overflow: hidden;
+  color: var(--muted);
+  font-size: 9px;
+  font-weight: 400;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.element-tile:not(:disabled):hover {
+  background: #fff7f0;
+}
+
+.element-tile:disabled {
+  border-color: var(--border);
+  color: #a2a8b0;
+  cursor: default;
+  opacity: 0.5;
+}
+
+.species-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 156px);
+  gap: 20px;
+}
+
+.species-card {
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  width: 156px;
+  height: 156px;
+  border: 1px solid #f0f0f0;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.10);
+  color: var(--accent);
+  padding: 18px;
+  text-align: center;
+}
+
+.species-card span,
+.species-card small {
+  font-size: 22px;
+  font-weight: 400;
+}
+
+.species-card:hover {
+  background: #fff7f0;
+}
+
 .dataset-card {
   background: var(--result);
   border: 1px solid #f8dfba;
@@ -172,9 +276,39 @@ button.secondary:hover {
   font-size: 18px;
 }
 
+.raw-file-view {
+  margin-top: 20px;
+}
+
+.raw-file-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 12px;
+}
+
+.raw-file-toolbar span {
+  color: var(--muted);
+  font-size: 18px;
+}
+
+.raw-file-view pre {
+  min-height: 70vh;
+  margin: 0;
+  overflow: auto;
+  background: #111;
+  color: #f5f5f5;
+  border-radius: 4px;
+  padding: 28px 36px;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 16px;
+  line-height: 1.35;
+  white-space: pre;
+}
+
 .empty,
 .error {
-  margin: 0;
+  margin: 20px 0 0;
   color: var(--muted);
   font-size: 18px;
 }
@@ -184,6 +318,22 @@ button.secondary:hover {
 }
 
 @media (max-width: 760px) {
+  .page {
+    margin-top: 30px;
+  }
+
+  .page-header {
+    margin-bottom: 28px;
+  }
+
+  .page-header h1 {
+    margin-bottom: 24px;
+  }
+
+  .page-header p {
+    font-size: 18px;
+  }
+
   .search-panel {
     padding: 22px;
   }
@@ -197,8 +347,20 @@ button.secondary:hover {
     grid-column: auto;
   }
 
+  .periodic-table {
+    grid-template-columns: repeat(18, 48px);
+  }
+
+  .species-grid {
+    grid-template-columns: repeat(auto-fit, minmax(132px, 1fr));
+  }
+
+  .species-card {
+    width: 100%;
+    height: 132px;
+  }
+
   .dataset-card {
     padding: 18px;
   }
 }
-

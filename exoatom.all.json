@@ -1,47 +1,3037 @@
 {
   "ExoAtom": {
     "ID": "exoatom.all.json",
-    "version": "20260624"
+    "version": "20260625"
   },
   "atoms": [
     {
-      "name": "Magnesium",
-      "formula": "Mg",
+      "name": "Lithium",
+      "formula": "Li-I",
       "num_isotopes": 1,
       "isotopes": [
         {
-          "iso_slug": "Mg",
-          "iso_formula": "Mg",
-          "dataset": "NIST",
-          "version": 20240601
-        },
+          "iso_slug": "Li-I",
+          "iso_formula": "Li",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Beryllium",
+      "formula": "Be-I",
+      "num_isotopes": 1,
+      "isotopes": [
         {
-          "iso_slug": "Mg",
+          "iso_slug": "Be-I",
+          "iso_formula": "Be",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Beryllium Ion (II)",
+      "formula": "Be-II",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Be-II",
+          "iso_formula": "Be+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Boron",
+      "formula": "B-I",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "B-I",
+          "iso_formula": "B",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Boron Ion (II)",
+      "formula": "B-II",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "B-II",
+          "iso_formula": "B+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Boron Ion (III)",
+      "formula": "B-III",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "B-III",
+          "iso_formula": "B2+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Carbon",
+      "formula": "C-I",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "C-I",
+          "iso_formula": "C",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Carbon Ion (II)",
+      "formula": "C-II",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "C-II",
+          "iso_formula": "C+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Carbon Ion (III)",
+      "formula": "C-III",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "C-III",
+          "iso_formula": "C2+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Carbon Ion (IV)",
+      "formula": "C-IV",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "C-IV",
+          "iso_formula": "C3+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Nitrogen",
+      "formula": "N-I",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "N-I",
+          "iso_formula": "N",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Nitrogen Ion (II)",
+      "formula": "N-II",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "N-II",
+          "iso_formula": "N+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Nitrogen Ion (III)",
+      "formula": "N-III",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "N-III",
+          "iso_formula": "N2+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Nitrogen Ion (IV)",
+      "formula": "N-IV",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "N-IV",
+          "iso_formula": "N3+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Nitrogen Ion (V)",
+      "formula": "N-V",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "N-V",
+          "iso_formula": "N4+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Oxygen",
+      "formula": "O-I",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "O-I",
+          "iso_formula": "O",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Oxygen Ion (II)",
+      "formula": "O-II",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "O-II",
+          "iso_formula": "O+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Oxygen Ion (III)",
+      "formula": "O-III",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "O-III",
+          "iso_formula": "O2+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Oxygen Ion (IV)",
+      "formula": "O-IV",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "O-IV",
+          "iso_formula": "O3+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Oxygen Ion (V)",
+      "formula": "O-V",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "O-V",
+          "iso_formula": "O4+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Oxygen Ion (VI)",
+      "formula": "O-VI",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "O-VI",
+          "iso_formula": "O5+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Fluorine",
+      "formula": "F-I",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "F-I",
+          "iso_formula": "F",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Fluorine Ion (II)",
+      "formula": "F-II",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "F-II",
+          "iso_formula": "F+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Fluorine Ion (III)",
+      "formula": "F-III",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "F-III",
+          "iso_formula": "F2+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Fluorine Ion (IV)",
+      "formula": "F-IV",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "F-IV",
+          "iso_formula": "F3+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Fluorine Ion (V)",
+      "formula": "F-V",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "F-V",
+          "iso_formula": "F4+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Fluorine Ion (VI)",
+      "formula": "F-VI",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "F-VI",
+          "iso_formula": "F5+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Neon",
+      "formula": "Ne-I",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Ne-I",
+          "iso_formula": "Ne",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Neon Ion (II)",
+      "formula": "Ne-II",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Ne-II",
+          "iso_formula": "Ne+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Neon Ion (III)",
+      "formula": "Ne-III",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Ne-III",
+          "iso_formula": "Ne2+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Neon Ion (IV)",
+      "formula": "Ne-IV",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Ne-IV",
+          "iso_formula": "Ne3+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Neon Ion (V)",
+      "formula": "Ne-V",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Ne-V",
+          "iso_formula": "Ne4+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Neon Ion (VI)",
+      "formula": "Ne-VI",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Ne-VI",
+          "iso_formula": "Ne5+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Sodium",
+      "formula": "Na-I",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Na-I",
+          "iso_formula": "Na",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Sodium Ion (II)",
+      "formula": "Na-II",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Na-II",
+          "iso_formula": "Na+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Sodium Ion (III)",
+      "formula": "Na-III",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Na-III",
+          "iso_formula": "Na2+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Sodium Ion (IV)",
+      "formula": "Na-IV",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Na-IV",
+          "iso_formula": "Na3+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Sodium Ion (V)",
+      "formula": "Na-V",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Na-V",
+          "iso_formula": "Na4+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Sodium Ion (VI)",
+      "formula": "Na-VI",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Na-VI",
+          "iso_formula": "Na5+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Magnesium",
+      "formula": "Mg-I",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Mg-I",
           "iso_formula": "Mg",
           "dataset": "Kurucz",
-          "version": 20240115
+          "version": 20260625
         }
       ]
     },
     {
       "name": "Magnesium Ion (II)",
-      "formula": "Mg_p",
+      "formula": "Mg-II",
       "num_isotopes": 1,
       "isotopes": [
         {
-          "iso_slug": "Mg_p",
-          "iso_formula": "Mg+",
-          "dataset": "NIST",
-          "version": 20240601
-        },
-        {
-          "iso_slug": "Mg_p",
+          "iso_slug": "Mg-II",
           "iso_formula": "Mg+",
           "dataset": "Kurucz",
-          "version": 20240115
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Magnesium Ion (III)",
+      "formula": "Mg-III",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Mg-III",
+          "iso_formula": "Mg2+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Magnesium Ion (IV)",
+      "formula": "Mg-IV",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Mg-IV",
+          "iso_formula": "Mg3+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Magnesium Ion (V)",
+      "formula": "Mg-V",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Mg-V",
+          "iso_formula": "Mg4+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Magnesium Ion (VI)",
+      "formula": "Mg-VI",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Mg-VI",
+          "iso_formula": "Mg5+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Aluminium",
+      "formula": "Al-I",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Al-I",
+          "iso_formula": "Al",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Aluminium Ion (II)",
+      "formula": "Al-II",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Al-II",
+          "iso_formula": "Al+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Aluminium Ion (III)",
+      "formula": "Al-III",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Al-III",
+          "iso_formula": "Al2+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Aluminium Ion (IV)",
+      "formula": "Al-IV",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Al-IV",
+          "iso_formula": "Al3+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Aluminium Ion (V)",
+      "formula": "Al-V",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Al-V",
+          "iso_formula": "Al4+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Aluminium Ion (VI)",
+      "formula": "Al-VI",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Al-VI",
+          "iso_formula": "Al5+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Silicon",
+      "formula": "Si-I",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Si-I",
+          "iso_formula": "Si",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Silicon Ion (II)",
+      "formula": "Si-II",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Si-II",
+          "iso_formula": "Si+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Silicon Ion (III)",
+      "formula": "Si-III",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Si-III",
+          "iso_formula": "Si2+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Silicon Ion (IV)",
+      "formula": "Si-IV",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Si-IV",
+          "iso_formula": "Si3+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Silicon Ion (V)",
+      "formula": "Si-V",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Si-V",
+          "iso_formula": "Si4+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Silicon Ion (VI)",
+      "formula": "Si-VI",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Si-VI",
+          "iso_formula": "Si5+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Phosphorus",
+      "formula": "P-I",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "P-I",
+          "iso_formula": "P",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Phosphorus Ion (II)",
+      "formula": "P-II",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "P-II",
+          "iso_formula": "P+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Phosphorus Ion (III)",
+      "formula": "P-III",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "P-III",
+          "iso_formula": "P2+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Phosphorus Ion (IV)",
+      "formula": "P-IV",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "P-IV",
+          "iso_formula": "P3+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Phosphorus Ion (V)",
+      "formula": "P-V",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "P-V",
+          "iso_formula": "P4+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Phosphorus Ion (VI)",
+      "formula": "P-VI",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "P-VI",
+          "iso_formula": "P5+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Sulfur",
+      "formula": "S-I",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "S-I",
+          "iso_formula": "S",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Sulfur Ion (II)",
+      "formula": "S-II",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "S-II",
+          "iso_formula": "S+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Sulfur Ion (III)",
+      "formula": "S-III",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "S-III",
+          "iso_formula": "S2+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Sulfur Ion (IV)",
+      "formula": "S-IV",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "S-IV",
+          "iso_formula": "S3+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Sulfur Ion (V)",
+      "formula": "S-V",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "S-V",
+          "iso_formula": "S4+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Sulfur Ion (VI)",
+      "formula": "S-VI",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "S-VI",
+          "iso_formula": "S5+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Chlorine",
+      "formula": "Cl-I",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Cl-I",
+          "iso_formula": "Cl",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Chlorine Ion (II)",
+      "formula": "Cl-II",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Cl-II",
+          "iso_formula": "Cl+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Chlorine Ion (III)",
+      "formula": "Cl-III",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Cl-III",
+          "iso_formula": "Cl2+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Chlorine Ion (V)",
+      "formula": "Cl-V",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Cl-V",
+          "iso_formula": "Cl4+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Chlorine Ion (VI)",
+      "formula": "Cl-VI",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Cl-VI",
+          "iso_formula": "Cl5+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Argon",
+      "formula": "Ar-I",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Ar-I",
+          "iso_formula": "Ar",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Argon Ion (II)",
+      "formula": "Ar-II",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Ar-II",
+          "iso_formula": "Ar+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Argon Ion (III)",
+      "formula": "Ar-III",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Ar-III",
+          "iso_formula": "Ar2+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Argon Ion (IV)",
+      "formula": "Ar-IV",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Ar-IV",
+          "iso_formula": "Ar3+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Argon Ion (V)",
+      "formula": "Ar-V",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Ar-V",
+          "iso_formula": "Ar4+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Argon Ion (VI)",
+      "formula": "Ar-VI",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Ar-VI",
+          "iso_formula": "Ar5+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Potassium",
+      "formula": "K-I",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "K-I",
+          "iso_formula": "K",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Potassium Ion (II)",
+      "formula": "K-II",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "K-II",
+          "iso_formula": "K+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Potassium Ion (III)",
+      "formula": "K-III",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "K-III",
+          "iso_formula": "K2+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Potassium Ion (IV)",
+      "formula": "K-IV",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "K-IV",
+          "iso_formula": "K3+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Potassium Ion (V)",
+      "formula": "K-V",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "K-V",
+          "iso_formula": "K4+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Potassium Ion (VI)",
+      "formula": "K-VI",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "K-VI",
+          "iso_formula": "K5+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Calcium",
+      "formula": "Ca-I",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Ca-I",
+          "iso_formula": "Ca",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Calcium Ion (II)",
+      "formula": "Ca-II",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Ca-II",
+          "iso_formula": "Ca+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Calcium Ion (III)",
+      "formula": "Ca-III",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Ca-III",
+          "iso_formula": "Ca2+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Calcium Ion (IV)",
+      "formula": "Ca-IV",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Ca-IV",
+          "iso_formula": "Ca3+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Calcium Ion (V)",
+      "formula": "Ca-V",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Ca-V",
+          "iso_formula": "Ca4+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Calcium Ion (VI)",
+      "formula": "Ca-VI",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Ca-VI",
+          "iso_formula": "Ca5+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Calcium Ion (VII)",
+      "formula": "Ca-VII",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Ca-VII",
+          "iso_formula": "Ca6+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Calcium Ion (VIII)",
+      "formula": "Ca-VIII",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Ca-VIII",
+          "iso_formula": "Ca7+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Calcium Ion (IX)",
+      "formula": "Ca-IX",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Ca-IX",
+          "iso_formula": "Ca8+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Scandium",
+      "formula": "Sc-I",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Sc-I",
+          "iso_formula": "Sc",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Scandium Ion (II)",
+      "formula": "Sc-II",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Sc-II",
+          "iso_formula": "Sc+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Scandium Ion (III)",
+      "formula": "Sc-III",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Sc-III",
+          "iso_formula": "Sc2+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Scandium Ion (IV)",
+      "formula": "Sc-IV",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Sc-IV",
+          "iso_formula": "Sc3+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Scandium Ion (V)",
+      "formula": "Sc-V",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Sc-V",
+          "iso_formula": "Sc4+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Scandium Ion (VI)",
+      "formula": "Sc-VI",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Sc-VI",
+          "iso_formula": "Sc5+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Scandium Ion (VII)",
+      "formula": "Sc-VII",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Sc-VII",
+          "iso_formula": "Sc6+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Scandium Ion (VIII)",
+      "formula": "Sc-VIII",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Sc-VIII",
+          "iso_formula": "Sc7+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Scandium Ion (IX)",
+      "formula": "Sc-IX",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Sc-IX",
+          "iso_formula": "Sc8+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Titanium",
+      "formula": "Ti-I",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Ti-I",
+          "iso_formula": "Ti",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Titanium Ion (II)",
+      "formula": "Ti-II",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Ti-II",
+          "iso_formula": "Ti+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Titanium Ion (III)",
+      "formula": "Ti-III",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Ti-III",
+          "iso_formula": "Ti2+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Titanium Ion (IV)",
+      "formula": "Ti-IV",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Ti-IV",
+          "iso_formula": "Ti3+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Titanium Ion (V)",
+      "formula": "Ti-V",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Ti-V",
+          "iso_formula": "Ti4+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Titanium Ion (VI)",
+      "formula": "Ti-VI",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Ti-VI",
+          "iso_formula": "Ti5+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Titanium Ion (VII)",
+      "formula": "Ti-VII",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Ti-VII",
+          "iso_formula": "Ti6+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Titanium Ion (VIII)",
+      "formula": "Ti-VIII",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Ti-VIII",
+          "iso_formula": "Ti7+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Titanium Ion (IX)",
+      "formula": "Ti-IX",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Ti-IX",
+          "iso_formula": "Ti8+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Vanadium",
+      "formula": "V-I",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "V-I",
+          "iso_formula": "V",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Vanadium Ion (II)",
+      "formula": "V-II",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "V-II",
+          "iso_formula": "V+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Vanadium Ion (III)",
+      "formula": "V-III",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "V-III",
+          "iso_formula": "V2+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Vanadium Ion (IV)",
+      "formula": "V-IV",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "V-IV",
+          "iso_formula": "V3+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Vanadium Ion (V)",
+      "formula": "V-V",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "V-V",
+          "iso_formula": "V4+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Vanadium Ion (VI)",
+      "formula": "V-VI",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "V-VI",
+          "iso_formula": "V5+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Vanadium Ion (VII)",
+      "formula": "V-VII",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "V-VII",
+          "iso_formula": "V6+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Vanadium Ion (VIII)",
+      "formula": "V-VIII",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "V-VIII",
+          "iso_formula": "V7+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Vanadium Ion (IX)",
+      "formula": "V-IX",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "V-IX",
+          "iso_formula": "V8+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Chromium",
+      "formula": "Cr-I",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Cr-I",
+          "iso_formula": "Cr",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Chromium Ion (II)",
+      "formula": "Cr-II",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Cr-II",
+          "iso_formula": "Cr+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Chromium Ion (III)",
+      "formula": "Cr-III",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Cr-III",
+          "iso_formula": "Cr2+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Chromium Ion (IV)",
+      "formula": "Cr-IV",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Cr-IV",
+          "iso_formula": "Cr3+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Chromium Ion (V)",
+      "formula": "Cr-V",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Cr-V",
+          "iso_formula": "Cr4+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Chromium Ion (VI)",
+      "formula": "Cr-VI",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Cr-VI",
+          "iso_formula": "Cr5+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Chromium Ion (VII)",
+      "formula": "Cr-VII",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Cr-VII",
+          "iso_formula": "Cr6+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Chromium Ion (VIII)",
+      "formula": "Cr-VIII",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Cr-VIII",
+          "iso_formula": "Cr7+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Chromium Ion (IX)",
+      "formula": "Cr-IX",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Cr-IX",
+          "iso_formula": "Cr8+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Manganese",
+      "formula": "Mn-I",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Mn-I",
+          "iso_formula": "Mn",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Manganese Ion (II)",
+      "formula": "Mn-II",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Mn-II",
+          "iso_formula": "Mn+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Manganese Ion (III)",
+      "formula": "Mn-III",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Mn-III",
+          "iso_formula": "Mn2+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Manganese Ion (IV)",
+      "formula": "Mn-IV",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Mn-IV",
+          "iso_formula": "Mn3+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Manganese Ion (V)",
+      "formula": "Mn-V",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Mn-V",
+          "iso_formula": "Mn4+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Manganese Ion (VI)",
+      "formula": "Mn-VI",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Mn-VI",
+          "iso_formula": "Mn5+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Manganese Ion (VII)",
+      "formula": "Mn-VII",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Mn-VII",
+          "iso_formula": "Mn6+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Manganese Ion (VIII)",
+      "formula": "Mn-VIII",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Mn-VIII",
+          "iso_formula": "Mn7+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Manganese Ion (IX)",
+      "formula": "Mn-IX",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Mn-IX",
+          "iso_formula": "Mn8+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Iron",
+      "formula": "Fe-I",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Fe-I",
+          "iso_formula": "Fe",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Iron Ion (II)",
+      "formula": "Fe-II",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Fe-II",
+          "iso_formula": "Fe+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Iron Ion (III)",
+      "formula": "Fe-III",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Fe-III",
+          "iso_formula": "Fe2+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Iron Ion (IV)",
+      "formula": "Fe-IV",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Fe-IV",
+          "iso_formula": "Fe3+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Iron Ion (V)",
+      "formula": "Fe-V",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Fe-V",
+          "iso_formula": "Fe4+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Iron Ion (VI)",
+      "formula": "Fe-VI",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Fe-VI",
+          "iso_formula": "Fe5+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Iron Ion (VII)",
+      "formula": "Fe-VII",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Fe-VII",
+          "iso_formula": "Fe6+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Iron Ion (VIII)",
+      "formula": "Fe-VIII",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Fe-VIII",
+          "iso_formula": "Fe7+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Iron Ion (IX)",
+      "formula": "Fe-IX",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Fe-IX",
+          "iso_formula": "Fe8+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Iron Ion (X)",
+      "formula": "Fe-X",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Fe-X",
+          "iso_formula": "Fe9+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Cobalt",
+      "formula": "Co-I",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Co-I",
+          "iso_formula": "Co",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Cobalt Ion (II)",
+      "formula": "Co-II",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Co-II",
+          "iso_formula": "Co+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Cobalt Ion (III)",
+      "formula": "Co-III",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Co-III",
+          "iso_formula": "Co2+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Cobalt Ion (IV)",
+      "formula": "Co-IV",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Co-IV",
+          "iso_formula": "Co3+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Cobalt Ion (V)",
+      "formula": "Co-V",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Co-V",
+          "iso_formula": "Co4+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Cobalt Ion (VI)",
+      "formula": "Co-VI",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Co-VI",
+          "iso_formula": "Co5+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Cobalt Ion (VII)",
+      "formula": "Co-VII",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Co-VII",
+          "iso_formula": "Co6+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Cobalt Ion (VIII)",
+      "formula": "Co-VIII",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Co-VIII",
+          "iso_formula": "Co7+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Cobalt Ion (IX)",
+      "formula": "Co-IX",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Co-IX",
+          "iso_formula": "Co8+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Nickel",
+      "formula": "Ni-I",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Ni-I",
+          "iso_formula": "Ni",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Nickel Ion (II)",
+      "formula": "Ni-II",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Ni-II",
+          "iso_formula": "Ni+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Nickel Ion (III)",
+      "formula": "Ni-III",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Ni-III",
+          "iso_formula": "Ni2+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Nickel Ion (IV)",
+      "formula": "Ni-IV",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Ni-IV",
+          "iso_formula": "Ni3+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Nickel Ion (V)",
+      "formula": "Ni-V",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Ni-V",
+          "iso_formula": "Ni4+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Nickel Ion (VI)",
+      "formula": "Ni-VI",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Ni-VI",
+          "iso_formula": "Ni5+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Nickel Ion (VII)",
+      "formula": "Ni-VII",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Ni-VII",
+          "iso_formula": "Ni6+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Nickel Ion (VIII)",
+      "formula": "Ni-VIII",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Ni-VIII",
+          "iso_formula": "Ni7+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Nickel Ion (IX)",
+      "formula": "Ni-IX",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Ni-IX",
+          "iso_formula": "Ni8+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Nickel Ion (X)",
+      "formula": "Ni-X",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Ni-X",
+          "iso_formula": "Ni9+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Copper",
+      "formula": "Cu-I",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Cu-I",
+          "iso_formula": "Cu",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Copper Ion (II)",
+      "formula": "Cu-II",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Cu-II",
+          "iso_formula": "Cu+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Copper Ion (III)",
+      "formula": "Cu-III",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Cu-III",
+          "iso_formula": "Cu2+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Copper Ion (IV)",
+      "formula": "Cu-IV",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Cu-IV",
+          "iso_formula": "Cu3+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Copper Ion (V)",
+      "formula": "Cu-V",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Cu-V",
+          "iso_formula": "Cu4+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Copper Ion (VI)",
+      "formula": "Cu-VI",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Cu-VI",
+          "iso_formula": "Cu5+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Copper Ion (VII)",
+      "formula": "Cu-VII",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Cu-VII",
+          "iso_formula": "Cu6+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Copper Ion (VIII)",
+      "formula": "Cu-VIII",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Cu-VIII",
+          "iso_formula": "Cu7+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Copper Ion (IX)",
+      "formula": "Cu-IX",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Cu-IX",
+          "iso_formula": "Cu8+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Copper Ion (X)",
+      "formula": "Cu-X",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Cu-X",
+          "iso_formula": "Cu9+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Zinc",
+      "formula": "Zn-I",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Zn-I",
+          "iso_formula": "Zn",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Zinc Ion (II)",
+      "formula": "Zn-II",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Zn-II",
+          "iso_formula": "Zn+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Zinc Ion (III)",
+      "formula": "Zn-III",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Zn-III",
+          "iso_formula": "Zn2+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Zinc Ion (IV)",
+      "formula": "Zn-IV",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Zn-IV",
+          "iso_formula": "Zn3+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Zinc Ion (V)",
+      "formula": "Zn-V",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Zn-V",
+          "iso_formula": "Zn4+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Zinc Ion (VI)",
+      "formula": "Zn-VI",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Zn-VI",
+          "iso_formula": "Zn5+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Zinc Ion (VII)",
+      "formula": "Zn-VII",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Zn-VII",
+          "iso_formula": "Zn6+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Zinc Ion (VIII)",
+      "formula": "Zn-VIII",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Zn-VIII",
+          "iso_formula": "Zn7+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Zinc Ion (IX)",
+      "formula": "Zn-IX",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Zn-IX",
+          "iso_formula": "Zn8+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Strontium",
+      "formula": "Sr-I",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Sr-I",
+          "iso_formula": "Sr",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Strontium Ion (II)",
+      "formula": "Sr-II",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Sr-II",
+          "iso_formula": "Sr+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Strontium Ion (III)",
+      "formula": "Sr-III",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Sr-III",
+          "iso_formula": "Sr2+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Strontium Ion (IV)",
+      "formula": "Sr-IV",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Sr-IV",
+          "iso_formula": "Sr3+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Strontium Ion (V)",
+      "formula": "Sr-V",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Sr-V",
+          "iso_formula": "Sr4+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Yttrium",
+      "formula": "Y-I",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Y-I",
+          "iso_formula": "Y",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Yttrium Ion (II)",
+      "formula": "Y-II",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Y-II",
+          "iso_formula": "Y+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Yttrium Ion (V)",
+      "formula": "Y-V",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Y-V",
+          "iso_formula": "Y4+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Zirconium",
+      "formula": "Zr-I",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Zr-I",
+          "iso_formula": "Zr",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Zirconium Ion (II)",
+      "formula": "Zr-II",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Zr-II",
+          "iso_formula": "Zr+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Zirconium Ion (III)",
+      "formula": "Zr-III",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Zr-III",
+          "iso_formula": "Zr2+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Zirconium Ion (IV)",
+      "formula": "Zr-IV",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Zr-IV",
+          "iso_formula": "Zr3+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Zirconium Ion (V)",
+      "formula": "Zr-V",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Zr-V",
+          "iso_formula": "Zr4+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Niobium",
+      "formula": "Nb-I",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Nb-I",
+          "iso_formula": "Nb",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Niobium Ion (II)",
+      "formula": "Nb-II",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Nb-II",
+          "iso_formula": "Nb+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Niobium Ion (III)",
+      "formula": "Nb-III",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Nb-III",
+          "iso_formula": "Nb2+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Niobium Ion (IV)",
+      "formula": "Nb-IV",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Nb-IV",
+          "iso_formula": "Nb3+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Niobium Ion (V)",
+      "formula": "Nb-V",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Nb-V",
+          "iso_formula": "Nb4+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Molybdenum",
+      "formula": "Mo-I",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Mo-I",
+          "iso_formula": "Mo",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Molybdenum Ion (II)",
+      "formula": "Mo-II",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Mo-II",
+          "iso_formula": "Mo+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Molybdenum Ion (III)",
+      "formula": "Mo-III",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Mo-III",
+          "iso_formula": "Mo2+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Molybdenum Ion (IV)",
+      "formula": "Mo-IV",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Mo-IV",
+          "iso_formula": "Mo3+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Technetium",
+      "formula": "Tc-I",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Tc-I",
+          "iso_formula": "Tc",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Technetium Ion (II)",
+      "formula": "Tc-II",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Tc-II",
+          "iso_formula": "Tc+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Technetium Ion (III)",
+      "formula": "Tc-III",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Tc-III",
+          "iso_formula": "Tc2+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Technetium Ion (IV)",
+      "formula": "Tc-IV",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Tc-IV",
+          "iso_formula": "Tc3+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Technetium Ion (V)",
+      "formula": "Tc-V",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Tc-V",
+          "iso_formula": "Tc4+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Ruthenium",
+      "formula": "Ru-I",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Ru-I",
+          "iso_formula": "Ru",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Ruthenium Ion (II)",
+      "formula": "Ru-II",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Ru-II",
+          "iso_formula": "Ru+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Ruthenium Ion (III)",
+      "formula": "Ru-III",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Ru-III",
+          "iso_formula": "Ru2+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Ruthenium Ion (IV)",
+      "formula": "Ru-IV",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Ru-IV",
+          "iso_formula": "Ru3+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Ruthenium Ion (V)",
+      "formula": "Ru-V",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Ru-V",
+          "iso_formula": "Ru4+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Rhodium",
+      "formula": "Rh-I",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Rh-I",
+          "iso_formula": "Rh",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Rhodium Ion (II)",
+      "formula": "Rh-II",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Rh-II",
+          "iso_formula": "Rh+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Rhodium Ion (III)",
+      "formula": "Rh-III",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Rh-III",
+          "iso_formula": "Rh2+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Rhodium Ion (IV)",
+      "formula": "Rh-IV",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Rh-IV",
+          "iso_formula": "Rh3+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Rhodium Ion (V)",
+      "formula": "Rh-V",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Rh-V",
+          "iso_formula": "Rh4+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Palladium",
+      "formula": "Pd-I",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Pd-I",
+          "iso_formula": "Pd",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Palladium Ion (II)",
+      "formula": "Pd-II",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Pd-II",
+          "iso_formula": "Pd+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Palladium Ion (III)",
+      "formula": "Pd-III",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Pd-III",
+          "iso_formula": "Pd2+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Palladium Ion (IV)",
+      "formula": "Pd-IV",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Pd-IV",
+          "iso_formula": "Pd3+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Palladium Ion (V)",
+      "formula": "Pd-V",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Pd-V",
+          "iso_formula": "Pd4+",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Silver",
+      "formula": "Ag-I",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Ag-I",
+          "iso_formula": "Ag",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Barium",
+      "formula": "Ba-I",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Ba-I",
+          "iso_formula": "Ba",
+          "dataset": "Kurucz",
+          "version": 20260625
+        }
+      ]
+    },
+    {
+      "name": "Barium Ion (II)",
+      "formula": "Ba-II",
+      "num_isotopes": 1,
+      "isotopes": [
+        {
+          "iso_slug": "Ba-II",
+          "iso_formula": "Ba+",
+          "dataset": "Kurucz",
+          "version": 20260625
         }
       ]
     }
   ]
 }
-

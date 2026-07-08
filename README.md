@@ -37,6 +37,27 @@ node --check app.js
 node scripts/validate-data.js
 ```
 
+## Syncing Kurucz Data From Google Drive
+
+The Kurucz data files are expected to be supplied outside Git. If the Google
+Drive file is shared as "Anyone with the link can view", run:
+
+```bash
+python3 scripts/sync-kurucz-drive.py
+```
+
+The script downloads the archive, copies any available `.states`, `.trans`, and
+`.pf` files into `data/`, then generates matching `*.adef.json` files and
+`exoatom.all.json`. Missing file types are allowed and are simply omitted from
+the generated metadata.
+
+For a local archive or extracted folder:
+
+```bash
+python3 scripts/sync-kurucz-drive.py --source /path/to/kurucz-data.zip
+python3 scripts/sync-kurucz-drive.py --source /path/to/extracted-folder
+```
+
 ## Adding a Dataset
 
 Add the processed files into `data/`:

@@ -1,6 +1,18 @@
 const MASTER_INDEX_URL = "exoatom.all.json";
 const DATA_DIR = "data";
 
+const ELEMENTS = [
+  ["H", "Hydrogen", 1, 1], ["He", "Helium", 1, 18],
+  ["Li", "Lithium", 2, 1], ["Be", "Beryllium", 2, 2], ["B", "Boron", 2, 13], ["C", "Carbon", 2, 14], ["N", "Nitrogen", 2, 15], ["O", "Oxygen", 2, 16], ["F", "Fluorine", 2, 17], ["Ne", "Neon", 2, 18],
+  ["Na", "Sodium", 3, 1], ["Mg", "Magnesium", 3, 2], ["Al", "Aluminium", 3, 13], ["Si", "Silicon", 3, 14], ["P", "Phosphorus", 3, 15], ["S", "Sulfur", 3, 16], ["Cl", "Chlorine", 3, 17], ["Ar", "Argon", 3, 18],
+  ["K", "Potassium", 4, 1], ["Ca", "Calcium", 4, 2], ["Sc", "Scandium", 4, 3], ["Ti", "Titanium", 4, 4], ["V", "Vanadium", 4, 5], ["Cr", "Chromium", 4, 6], ["Mn", "Manganese", 4, 7], ["Fe", "Iron", 4, 8], ["Co", "Cobalt", 4, 9], ["Ni", "Nickel", 4, 10], ["Cu", "Copper", 4, 11], ["Zn", "Zinc", 4, 12], ["Ga", "Gallium", 4, 13], ["Ge", "Germanium", 4, 14], ["As", "Arsenic", 4, 15], ["Se", "Selenium", 4, 16], ["Br", "Bromine", 4, 17], ["Kr", "Krypton", 4, 18],
+  ["Rb", "Rubidium", 5, 1], ["Sr", "Strontium", 5, 2], ["Y", "Yttrium", 5, 3], ["Zr", "Zirconium", 5, 4], ["Nb", "Niobium", 5, 5], ["Mo", "Molybdenum", 5, 6], ["Tc", "Technetium", 5, 7], ["Ru", "Ruthenium", 5, 8], ["Rh", "Rhodium", 5, 9], ["Pd", "Palladium", 5, 10], ["Ag", "Silver", 5, 11], ["Cd", "Cadmium", 5, 12], ["In", "Indium", 5, 13], ["Sn", "Tin", 5, 14], ["Sb", "Antimony", 5, 15], ["Te", "Tellurium", 5, 16], ["I", "Iodine", 5, 17], ["Xe", "Xenon", 5, 18],
+  ["Cs", "Caesium", 6, 1], ["Ba", "Barium", 6, 2], ["La", "Lanthanum", 8, 4], ["Ce", "Cerium", 8, 5], ["Pr", "Praseodymium", 8, 6], ["Nd", "Neodymium", 8, 7], ["Pm", "Promethium", 8, 8], ["Sm", "Samarium", 8, 9], ["Eu", "Europium", 8, 10], ["Gd", "Gadolinium", 8, 11], ["Tb", "Terbium", 8, 12], ["Dy", "Dysprosium", 8, 13], ["Ho", "Holmium", 8, 14], ["Er", "Erbium", 8, 15], ["Tm", "Thulium", 8, 16], ["Yb", "Ytterbium", 8, 17], ["Lu", "Lutetium", 8, 18],
+  ["Hf", "Hafnium", 6, 4], ["Ta", "Tantalum", 6, 5], ["W", "Tungsten", 6, 6], ["Re", "Rhenium", 6, 7], ["Os", "Osmium", 6, 8], ["Ir", "Iridium", 6, 9], ["Pt", "Platinum", 6, 10], ["Au", "Gold", 6, 11], ["Hg", "Mercury", 6, 12], ["Tl", "Thallium", 6, 13], ["Pb", "Lead", 6, 14], ["Bi", "Bismuth", 6, 15], ["Po", "Polonium", 6, 16], ["At", "Astatine", 6, 17], ["Rn", "Radon", 6, 18],
+  ["Fr", "Francium", 7, 1], ["Ra", "Radium", 7, 2], ["Ac", "Actinium", 9, 4], ["Th", "Thorium", 9, 5], ["Pa", "Protactinium", 9, 6], ["U", "Uranium", 9, 7], ["Np", "Neptunium", 9, 8], ["Pu", "Plutonium", 9, 9], ["Am", "Americium", 9, 10], ["Cm", "Curium", 9, 11], ["Bk", "Berkelium", 9, 12], ["Cf", "Californium", 9, 13], ["Es", "Einsteinium", 9, 14], ["Fm", "Fermium", 9, 15], ["Md", "Mendelevium", 9, 16], ["No", "Nobelium", 9, 17], ["Lr", "Lawrencium", 9, 18],
+  ["Rf", "Rutherfordium", 7, 4], ["Db", "Dubnium", 7, 5], ["Sg", "Seaborgium", 7, 6], ["Bh", "Bohrium", 7, 7], ["Hs", "Hassium", 7, 8], ["Mt", "Meitnerium", 7, 9], ["Ds", "Darmstadtium", 7, 10], ["Rg", "Roentgenium", 7, 11], ["Cn", "Copernicium", 7, 12], ["Nh", "Nihonium", 7, 13], ["Fl", "Flerovium", 7, 14], ["Mc", "Moscovium", 7, 15], ["Lv", "Livermorium", 7, 16], ["Ts", "Tennessine", 7, 17], ["Og", "Oganesson", 7, 18]
+];
+
 const form = document.querySelector("#search-form");
 const speciesInput = document.querySelector("#species-input");
 const allStagesInput = document.querySelector("#all-stages-input");
@@ -17,58 +29,155 @@ form.addEventListener("submit", async (event) => {
 clearButton.addEventListener("click", () => {
   speciesInput.value = "";
   allStagesInput.checked = false;
-  resultsList.innerHTML = '<p class="empty">Search for a species such as Mg.</p>';
+  history.pushState({}, "", location.pathname);
+  showHome();
   speciesInput.focus();
 });
+
+window.addEventListener("popstate", () => {
+  routeFromUrl();
+});
+
+routeFromUrl();
+
+async function routeFromUrl() {
+  const params = new URLSearchParams(location.search);
+  const fileUrl = params.get("file");
+  const finalSpecies = params.get("qf");
+  const speciesQuery = params.get("q");
+
+  if (fileUrl) {
+    await showFileViewer(fileUrl, params.get("label") || fileUrl.split("/").pop());
+    return;
+  }
+
+  if (finalSpecies) {
+    await showDatasets(finalSpecies);
+    return;
+  }
+
+  if (speciesQuery) {
+    await showSpeciesChoices(speciesQuery, true);
+    return;
+  }
+
+  await showHome();
+}
 
 async function search() {
   const query = speciesInput.value.trim();
 
   if (!query) {
-    resultsList.innerHTML = '<p class="empty">Enter a species symbol first.</p>';
+    renderMessage("Enter a species symbol first.");
     return;
   }
 
+  const params = new URLSearchParams({ q: query });
+  history.pushState({}, "", `${location.pathname}?${params}`);
+  await showSpeciesChoices(query, allStagesInput.checked);
+}
+
+async function showHome() {
   try {
-    masterIndex = masterIndex || await fetchJson(MASTER_INDEX_URL);
-    const matches = findSpecies(masterIndex.atoms, query, allStagesInput.checked);
-
-    if (matches.length === 0) {
-      resultsList.innerHTML = `<p class="empty">No datasets found for ${escapeHtml(query)}.</p>`;
-      return;
-    }
-
-    resultsList.innerHTML = "";
-    for (const atom of matches) {
-      for (const isotope of atom.isotopes) {
-        const definition = await loadDefinition(isotope);
-        resultsList.appendChild(renderDatasetCard(definition));
-      }
-    }
+    const index = await getMasterIndex();
+    renderPeriodicTable(index.atoms || []);
   } catch (error) {
-    resultsList.innerHTML = `<p class="error">${escapeHtml(error.message)}</p>`;
+    renderError(error.message);
   }
 }
 
-function findSpecies(atoms, query, includeAllStages) {
-  const normalized = normalize(query);
-  return atoms.filter((atom) => {
-    const base = atom.formula.split("_")[0];
-    const exactFormula = normalize(atom.formula) === normalized;
-    const exactName = normalize(atom.name) === normalized;
-    const sameElement = normalize(base) === normalized;
+async function showSpeciesChoices(query, includeAllStages) {
+  try {
+    const index = await getMasterIndex();
+    const matches = findSpecies(index.atoms || [], query, includeAllStages);
 
-    if (includeAllStages) {
-      return sameElement || exactName;
+    if (matches.length === 0) {
+      renderMessage(`No species found for ${query}.`);
+      return;
     }
 
-    return exactFormula || exactName;
-  });
+    speciesInput.value = query;
+    renderSpeciesChoices(matches);
+  } catch (error) {
+    renderError(error.message);
+  }
 }
 
-async function loadDefinition(isotope) {
-  const filename = `${isotope.iso_slug}__${isotope.dataset}.adef.json`;
-  return fetchJson(`${DATA_DIR}/${filename}`);
+async function showDatasets(speciesSlug) {
+  try {
+    const index = await getMasterIndex();
+    const atom = findAtomBySlug(index.atoms || [], speciesSlug);
+
+    if (!atom) {
+      renderMessage(`No datasets found for ${speciesSlug}.`);
+      return;
+    }
+
+    speciesInput.value = atom.formula;
+    resultsList.innerHTML = `<h2>${escapeHtml(speciesTitle(atom))}</h2>`;
+    for (const isotope of atom.isotopes) {
+      const definition = await loadDefinition(isotope);
+      resultsList.appendChild(renderDatasetCard(definition));
+    }
+  } catch (error) {
+    renderError(error.message);
+  }
+}
+
+function renderPeriodicTable(atoms) {
+  const available = new Set(atoms.map((atom) => baseElement(atom.formula)));
+  const section = document.createElement("section");
+  section.className = "periodic-section";
+  section.innerHTML = "<h2>Select an element:</h2>";
+
+  const table = document.createElement("div");
+  table.className = "periodic-table";
+
+  for (const [symbol, name, row, column] of ELEMENTS) {
+    const button = document.createElement("button");
+    button.className = "element-tile";
+    button.type = "button";
+    button.style.gridRow = String(row);
+    button.style.gridColumn = String(column);
+    button.title = name;
+    button.innerHTML = `<span>${escapeHtml(symbol)}</span><small>${escapeHtml(name)}</small>`;
+
+    if (available.has(symbol)) {
+      button.addEventListener("click", () => navigateToSpecies(symbol));
+    } else {
+      button.disabled = true;
+      button.setAttribute("aria-label", `${name} is not available`);
+    }
+
+    table.appendChild(button);
+  }
+
+  section.appendChild(table);
+  resultsList.replaceChildren(section);
+}
+
+function renderSpeciesChoices(atoms) {
+  const section = document.createElement("section");
+  section.className = "species-section";
+  section.innerHTML = "<h2>Select a species:</h2>";
+
+  const grid = document.createElement("div");
+  grid.className = "species-grid";
+
+  for (const atom of atoms) {
+    const button = document.createElement("button");
+    button.className = "species-card";
+    button.type = "button";
+    button.innerHTML = `
+      <span>${escapeHtml(displayFormula(atom.formula))}</span>
+      <small>(${escapeHtml(spectroscopicLabel(atom.formula))})</small>
+    `;
+    button.addEventListener("click", () => navigateToDatasets(atom.formula));
+    grid.appendChild(button);
+  }
+
+  section.appendChild(grid);
+  resultsList.replaceChildren(section);
 }
 
 function renderDatasetCard(definition) {
@@ -78,22 +187,26 @@ function renderDatasetCard(definition) {
   const article = document.createElement("article");
   article.className = "dataset-card";
 
-  const titleName = species.charge === 0 ? species.atom : `${species.atom}_p`;
   article.innerHTML = `
-    <h3>${escapeHtml(titleName)}: ${escapeHtml(dataset.name)} Data Set version ${escapeHtml(String(dataset.version))}</h3>
+    <h3>${escapeHtml(species.spectroscopic_notation)}: ${escapeHtml(dataset.name)} Data Set version ${escapeHtml(String(dataset.version))}</h3>
     <div class="dataset-summary">
-      <p>${escapeHtml(species.spectroscopic_notation)} | mass = ${escapeHtml(String(species.mass_in_Da))} u</p>
-      <p>Max temperature: ${escapeHtml(String(dataset.max_temperature))} K</p>
+      <p>${escapeHtml(speciesSummary(species))}</p>
+      <p>${escapeHtml(maxTemperatureSummary(dataset))}</p>
       <p>${escapeHtml(datasetDescription(dataset.name))}</p>
     </div>
     <div class="file-list"></div>
   `;
 
   const fileList = article.querySelector(".file-list");
-  fileList.appendChild(renderFileCard(files.pf, "pf", definition));
-  fileList.appendChild(renderFileCard(files.states, "states", definition));
-  fileList.appendChild(renderFileCard(files.definition, "adef", definition));
-  fileList.appendChild(renderFileCard(files.trans, "trans", definition));
+  for (const type of ["pf", "states", "definition", "trans"]) {
+    if (files[type]) {
+      fileList.appendChild(renderFileCard(files[type], type === "definition" ? "adef" : type, definition));
+    }
+  }
+
+  if (!fileList.children.length) {
+    fileList.innerHTML = '<p class="empty">No local data files are available for this dataset.</p>';
+  }
 
   return article;
 }
@@ -102,15 +215,95 @@ function renderFileCard(filename, type, definition) {
   const card = document.createElement("div");
   card.className = "file-card";
 
-  const url = `${DATA_DIR}/${filename}`;
+  const file = resolveFile(filename);
   const lines = fileDescription(type, definition);
   card.innerHTML = `
-    <a href="${escapeHtml(url)}" download>${escapeHtml(filename)}</a>
+    <a href="${escapeHtml(file.viewerUrl)}">${escapeHtml(file.name)}</a>
     ${lines.map((line) => `<p>${escapeHtml(line)}</p>`).join("")}
   `;
 
-  updateFileSize(url, card.querySelector("a"));
+  card.querySelector("a").addEventListener("click", (event) => {
+    event.preventDefault();
+    history.pushState({}, "", file.viewerUrl);
+    showFileViewer(file.url, file.name);
+  });
+
+  updateFileSize(file.url, card.querySelector("a"));
   return card;
+}
+
+async function showFileViewer(fileUrl, label) {
+  if (!isSafeDataUrl(fileUrl)) {
+    renderError(`Cannot show ${fileUrl}. Only local data files can be previewed.`);
+    return;
+  }
+
+  resultsList.innerHTML = `
+    <section class="raw-file-view">
+      <div class="raw-file-toolbar">
+        <button class="secondary" type="button">Back</button>
+        <span>${escapeHtml(label)}</span>
+      </div>
+      <pre>Loading ${escapeHtml(label)}...</pre>
+    </section>
+  `;
+
+  resultsList.querySelector("button").addEventListener("click", () => history.back());
+
+  try {
+    const response = await fetch(fileUrl);
+    if (!response.ok) {
+      throw new Error(`Could not load ${fileUrl}.`);
+    }
+    const text = await response.text();
+    resultsList.querySelector("pre").textContent = text;
+  } catch (error) {
+    resultsList.querySelector("pre").textContent = error.message;
+  }
+}
+
+function findSpecies(atoms, query, includeAllStages) {
+  const normalized = normalizeQuery(query);
+  return atoms.filter((atom) => {
+    const base = normalizeQuery(baseElement(atom.formula));
+    const exactFormula = normalizeQuery(atom.formula) === normalized;
+    const exactName = normalizeQuery(atom.name) === normalized;
+    const exactDisplay = normalizeQuery(displayFormula(atom.formula)) === normalized;
+    const sameElement = base === normalized;
+
+    if (includeAllStages) {
+      return sameElement || exactName || exactFormula || exactDisplay;
+    }
+
+    return exactFormula || exactName || exactDisplay;
+  });
+}
+
+function findAtomBySlug(atoms, speciesSlugValue) {
+  const normalized = normalizeQuery(speciesSlugValue);
+  return atoms.find((atom) => normalizeQuery(atom.formula) === normalized || normalizeQuery(displayFormula(atom.formula)) === normalized);
+}
+
+function navigateToSpecies(symbol) {
+  const params = new URLSearchParams({ q: symbol });
+  history.pushState({}, "", `${location.pathname}?${params}`);
+  showSpeciesChoices(symbol, true);
+}
+
+function navigateToDatasets(formula) {
+  const params = new URLSearchParams({ qf: formula });
+  history.pushState({}, "", `${location.pathname}?${params}`);
+  showDatasets(formula);
+}
+
+async function loadDefinition(isotope) {
+  const filename = `${isotope.iso_slug}__${isotope.dataset}.adef.json`;
+  return fetchJson(`${DATA_DIR}/${filename}`);
+}
+
+async function getMasterIndex() {
+  masterIndex = masterIndex || await fetchJson(MASTER_INDEX_URL);
+  return masterIndex;
 }
 
 function fileDescription(type, definition) {
@@ -176,8 +369,70 @@ async function fetchJson(url) {
   return response.json();
 }
 
-function normalize(value) {
-  return String(value).trim().toLowerCase();
+function renderMessage(message) {
+  resultsList.innerHTML = `<p class="empty">${escapeHtml(message)}</p>`;
+}
+
+function renderError(message) {
+  resultsList.innerHTML = `<p class="error">${escapeHtml(message)}</p>`;
+}
+
+function resolveFile(fileRef) {
+  const name = typeof fileRef === "string" ? fileRef : fileRef.path || fileRef.name;
+  const url = typeof fileRef === "object" && fileRef.url ? fileRef.url : `${DATA_DIR}/${name}`;
+  const params = new URLSearchParams({ file: url, label: name });
+  return {
+    name,
+    url,
+    viewerUrl: `${location.pathname}?${params}`
+  };
+}
+
+function isSafeDataUrl(url) {
+  return !url.includes("://") && !url.startsWith("//") && url.startsWith(`${DATA_DIR}/`);
+}
+
+function baseElement(formula) {
+  return String(formula).split(/[-_+]/)[0];
+}
+
+function displayFormula(formula) {
+  return String(formula).replaceAll("-", " ");
+}
+
+function speciesTitle(atom) {
+  return `${displayFormula(atom.formula)} Datasets`;
+}
+
+function speciesSummary(species) {
+  if (species.mass_in_Da === null || species.mass_in_Da === undefined || species.mass_in_Da === "") {
+    return species.spectroscopic_notation;
+  }
+
+  return `${species.spectroscopic_notation} | mass = ${species.mass_in_Da} u`;
+}
+
+function maxTemperatureSummary(dataset) {
+  if (dataset.max_temperature === null || dataset.max_temperature === undefined || dataset.max_temperature === "") {
+    return "Max temperature: unavailable";
+  }
+
+  return `Max temperature: ${dataset.max_temperature} K`;
+}
+
+function spectroscopicLabel(formula) {
+  const base = baseElement(formula);
+  const stage = String(formula).includes("-") ? String(formula).split("-")[1] : "I";
+  return `${base} ${stage}`;
+}
+
+function romanNumeral(number) {
+  const numerals = ["", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"];
+  return numerals[number] || String(number);
+}
+
+function normalizeQuery(value) {
+  return String(value).trim().toLowerCase().replace(/\s+/g, "").replaceAll("-", "");
 }
 
 function formatBytes(bytes) {
@@ -195,4 +450,3 @@ function escapeHtml(value) {
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#039;");
 }
-

@@ -8,12 +8,18 @@
   </head>
   <body>
     <main class="page">
+      <header class="page-header">
+        <h1>ExoAtom</h1>
+        <p>This is the development version of ExoAtom.</p>
+        <p>Search for species using terms such as `Al`, `Cr+` or `W+`, or select an element from the periodic table below.</p>
+      </header>
+
       <section class="search-panel" aria-labelledby="search-title">
-        <h1 id="search-title">ExoAtom</h1>
+        <h2 id="search-title">Search</h2>
         <form id="search-form" class="search-form">
           <label class="field">
             <span>Species</span>
-            <input id="species-input" name="species" autocomplete="off" placeholder="Mg">
+            <input id="species-input" name="species" autocomplete="off" placeholder="Search...">
           </label>
 
           <label class="checkbox-field">
@@ -28,15 +34,11 @@
         </form>
       </section>
 
-      <section class="results" aria-live="polite">
-        <h2>Search Results</h2>
-        <div id="results-list" class="results-list">
-          <p class="empty">Search for a species such as Mg.</p>
-        </div>
+      <section id="results" class="results" aria-live="polite">
+        <div id="results-list" class="results-list"></div>
       </section>
     </main>
 
     <script src="app.js"></script>
   </body>
 </html>
-

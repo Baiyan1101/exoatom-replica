@@ -8,3 +8,10 @@
 /dist/
 /build/
 
+# ExoAtom local data files
+/exoatom.all.json
+/data/*.json
+/data/*.states
+/data/*.trans
+/data/*.pf
+/data/*.zip
