@@ -223,6 +223,12 @@ button.secondary:hover {
   font-weight: 400;
 }
 
+.species-card sup {
+  font-size: 0.62em;
+  line-height: 0;
+  vertical-align: super;
+}
+
 .species-card:hover {
   background: #fff7f0;
 }

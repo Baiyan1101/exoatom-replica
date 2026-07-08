@@ -44,6 +44,7 @@ async function routeFromUrl() {
   const params = new URLSearchParams(location.search);
   const fileUrl = params.get("file");
   const finalSpecies = params.get("qf");
+  const isotopeSlug = params.get("iso");
   const speciesQuery = params.get("q");
 
   if (fileUrl) {
@@ -52,7 +53,7 @@ async function routeFromUrl() {
   }
 
   if (finalSpecies) {
-    await showDatasets(finalSpecies);
+    await showDatasets(finalSpecies, isotopeSlug);
     return;
   }
 
@@ -103,7 +104,7 @@ async function showSpeciesChoices(query, includeAllStages) {
   }
 }
 
-async function showDatasets(speciesSlug) {
+async function showDatasets(speciesSlug, isotopeSlug = "") {
   try {
     const index = await getMasterIndex();
     const atom = findAtomBySlug(index.atoms || [], speciesSlug);
@@ -115,7 +116,16 @@ async function showDatasets(speciesSlug) {
 
     speciesInput.value = atom.formula;
     resultsList.innerHTML = `<h2>${escapeHtml(speciesTitle(atom))}</h2>`;
-    for (const isotope of atom.isotopes) {
+    const isotopes = isotopeSlug
+      ? (atom.isotopes || []).filter((isotope) => isotope.iso_slug === isotopeSlug)
+      : atom.isotopes || [];
+
+    if (isotopeSlug && isotopes.length === 0) {
+      renderMessage(`No datasets found for ${isotopeSlug}.`);
+      return;
+    }
+
+    for (const isotope of isotopes) {
       const definition = await loadDefinition(isotope);
       resultsList.appendChild(renderDatasetCard(definition));
     }
@@ -164,15 +174,16 @@ function renderSpeciesChoices(atoms) {
   const grid = document.createElement("div");
   grid.className = "species-grid";
 
-  for (const atom of atoms) {
+  for (const choice of speciesChoiceItems(atoms)) {
+    const labels = speciesChoiceLabels(choice);
     const button = document.createElement("button");
     button.className = "species-card";
     button.type = "button";
     button.innerHTML = `
-      <span>${escapeHtml(displayFormula(atom.formula))}</span>
-      <small>(${escapeHtml(spectroscopicLabel(atom.formula))})</small>
+      <span>${labels.primary}</span>
+      <small>(${labels.secondary})</small>
     `;
-    button.addEventListener("click", () => navigateToDatasets(atom.formula));
+    button.addEventListener("click", () => navigateToDatasets(choice.atom.formula, choice.isoSlug));
     grid.appendChild(button);
   }
 
@@ -264,18 +275,21 @@ async function showFileViewer(fileUrl, label) {
 
 function findSpecies(atoms, query, includeAllStages) {
   const normalized = normalizeQuery(query);
+  const normalizedSymbol = normalizeSymbol(query);
+  const normalizedSpectroscopic = normalizeSpectroscopic(query);
+
   return atoms.filter((atom) => {
-    const base = normalizeQuery(baseElement(atom.formula));
-    const exactFormula = normalizeQuery(atom.formula) === normalized;
+    const base = normalizeSymbol(baseElement(atom.formula));
+    const exactFormula = normalizeFormulaSlug(atom.formula) === normalizeFormulaSlug(query) || normalizeSpectroscopic(displayFormula(atom.formula)) === normalizedSpectroscopic;
     const exactName = normalizeQuery(atom.name) === normalized;
-    const exactDisplay = normalizeQuery(displayFormula(atom.formula)) === normalized;
-    const sameElement = base === normalized;
+    const sameElement = base === normalizedSymbol;
+    const neutralElement = sameElement && ionStage(atom.formula) === "I";
 
     if (includeAllStages) {
-      return sameElement || exactName || exactFormula || exactDisplay;
+      return sameElement || exactName || exactFormula;
     }
 
-    return exactFormula || exactName || exactDisplay;
+    return neutralElement || exactFormula || exactName;
   });
 }
 
@@ -290,10 +304,13 @@ function navigateToSpecies(symbol) {
   showSpeciesChoices(symbol, true);
 }
 
-function navigateToDatasets(formula) {
+function navigateToDatasets(formula, isotopeSlug = "") {
   const params = new URLSearchParams({ qf: formula });
+  if (isotopeSlug) {
+    params.set("iso", isotopeSlug);
+  }
   history.pushState({}, "", `${location.pathname}?${params}`);
-  showDatasets(formula);
+  showDatasets(formula, isotopeSlug);
 }
 
 async function loadDefinition(isotope) {
@@ -404,6 +421,79 @@ function speciesTitle(atom) {
   return `${displayFormula(atom.formula)} Datasets`;
 }
 
+function speciesChoiceItems(atoms) {
+  const choices = [];
+
+  for (const atom of atoms) {
+    const isotopeChoices = uniqueIsotopeChoices(atom);
+    if (isotopeChoices.length <= 1) {
+      choices.push({
+        atom,
+        isoFormula: isotopeChoices[0] ? isotopeChoices[0].iso_formula : "",
+        isoSlug: ""
+      });
+      continue;
+    }
+
+    for (const isotope of isotopeChoices) {
+      choices.push({
+        atom,
+        isoFormula: isotope.iso_formula,
+        isoSlug: isotope.iso_slug
+      });
+    }
+  }
+
+  return choices;
+}
+
+function uniqueIsotopeChoices(atom) {
+  const choices = new Map();
+  for (const isotope of atom.isotopes || []) {
+    const formula = isotope.iso_formula || "";
+    if (formula && !choices.has(formula)) {
+      choices.set(formula, isotope);
+    }
+  }
+
+  return Array.from(choices.values());
+}
+
+function speciesChoiceLabels(choice) {
+  const primaryFormula = choice.isoFormula || firstIsoFormula(choice.atom) || ionFormulaFromSlug(choice.atom.formula);
+  const secondaryFormula = isotopeBaseFormula(primaryFormula);
+
+  return {
+    primary: formulaHtml(primaryFormula),
+    secondary: `${formulaHtml(secondaryFormula)} ${escapeHtml(ionStage(choice.atom.formula))}`
+  };
+}
+
+function firstIsoFormula(atom) {
+  const isotope = (atom.isotopes || []).find((item) => item.iso_formula);
+  return isotope ? isotope.iso_formula : "";
+}
+
+function ionFormulaFromSlug(formula) {
+  const symbol = baseElement(formula);
+  const charge = ionStageNumber(formula) - 1;
+
+  if (charge <= 0) return symbol;
+  if (charge === 1) return `${symbol}+`;
+  return `${symbol}${charge}+`;
+}
+
+function isotopeBaseFormula(formula) {
+  return String(formula).replace(/(?:\d+)?\+$/, "");
+}
+
+function formulaHtml(formula) {
+  return escapeHtml(formula)
+    .replace(/^(\d+)([A-Z][a-z]?)/, "<sup>$1</sup>$2")
+    .replace(/^([A-Z][a-z]?)(\d+)\+$/, "$1<sup>$2+</sup>")
+    .replace(/^([A-Z][a-z]?)\+$/, "$1<sup>+</sup>");
+}
+
 function speciesSummary(species) {
   if (species.mass_in_Da === null || species.mass_in_Da === undefined || species.mass_in_Da === "") {
     return species.spectroscopic_notation;
@@ -421,18 +511,53 @@ function maxTemperatureSummary(dataset) {
 }
 
 function spectroscopicLabel(formula) {
-  const base = baseElement(formula);
-  const stage = String(formula).includes("-") ? String(formula).split("-")[1] : "I";
-  return `${base} ${stage}`;
+  return `${baseElement(formula)} ${ionStage(formula)}`;
 }
 
-function romanNumeral(number) {
-  const numerals = ["", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"];
-  return numerals[number] || String(number);
+function ionStage(formula) {
+  return String(formula).includes("-") ? String(formula).split("-")[1] : "I";
+}
+
+function ionStageNumber(formula) {
+  const numerals = {
+    I: 1,
+    II: 2,
+    III: 3,
+    IV: 4,
+    V: 5,
+    VI: 6,
+    VII: 7,
+    VIII: 8,
+    IX: 9,
+    X: 10,
+    XI: 11,
+    XII: 12,
+    XIII: 13,
+    XIV: 14,
+    XV: 15,
+    XVI: 16,
+    XVII: 17,
+    XVIII: 18,
+    XIX: 19,
+    XX: 20
+  };
+  return numerals[ionStage(formula)] || 1;
 }
 
 function normalizeQuery(value) {
   return String(value).trim().toLowerCase().replace(/\s+/g, "").replaceAll("-", "");
+}
+
+function normalizeFormulaSlug(value) {
+  return String(value).trim().toLowerCase().replace(/\s+/g, "-").replace(/_+/g, "-");
+}
+
+function normalizeSymbol(value) {
+  return String(value).trim().toLowerCase();
+}
+
+function normalizeSpectroscopic(value) {
+  return String(value).trim().toLowerCase().replace(/[-_]+/g, " ").replace(/\s+/g, " ");
 }
 
 function formatBytes(bytes) {
