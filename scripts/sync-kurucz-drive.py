@@ -13,7 +13,7 @@ from pathlib import Path
 
 
 DEFAULT_URL = "https://drive.usercontent.google.com/download?id=1zdXifnTArdfQfG_KmD-PY3okJjWzP7BG&export=download&authuser=0"
-DATASET = "Kurucz"
+DEFAULT_DATASET = "Kurucz"
 
 ELEMENTS = [
     ("H", "Hydrogen"), ("He", "Helium"), ("Li", "Lithium"), ("Be", "Beryllium"),
@@ -50,53 +50,65 @@ ELEMENTS = [
 
 ELEMENT_NAMES = dict(ELEMENTS)
 ELEMENT_ORDER = {symbol: index for index, (symbol, _) in enumerate(ELEMENTS)}
-ROMAN = ["", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"]
+ROMAN_VALUES = [
+    (1000, "M"),
+    (900, "CM"),
+    (500, "D"),
+    (400, "CD"),
+    (100, "C"),
+    (90, "XC"),
+    (50, "L"),
+    (40, "XL"),
+    (10, "X"),
+    (9, "IX"),
+    (5, "V"),
+    (4, "IV"),
+    (1, "I"),
+]
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Download Kurucz ExoAtom files and generate metadata.")
+    parser = argparse.ArgumentParser(description="Download ExoAtom files and generate metadata.")
     parser.add_argument("--url", default=DEFAULT_URL, help="Google Drive direct download URL.")
     parser.add_argument("--source", help="Use an existing zip file or extracted directory instead of downloading.")
+    parser.add_argument("--dataset", default=DEFAULT_DATASET, help="Dataset name, for example Kurucz or NIST.")
     parser.add_argument("--data-dir", default="data", help="Directory where data files and adef JSON files are written.")
     parser.add_argument("--master", default="exoatom.all.json", help="Master index JSON path.")
     parser.add_argument("--version", default=datetime.now(timezone.utc).strftime("%Y%m%d"), help="Dataset/index version.")
-    parser.add_argument("--keep-existing", action="store_true", help="Do not remove existing Kurucz data files first.")
+    parser.add_argument("--keep-existing", action="store_true", help="Do not remove existing files for this dataset first.")
     args = parser.parse_args()
 
     root = Path.cwd()
     data_dir = root / args.data_dir
     data_dir.mkdir(parents=True, exist_ok=True)
+    dataset = args.dataset
 
-    with tempfile.TemporaryDirectory(prefix="exoatom-kurucz-") as tmp:
+    with tempfile.TemporaryDirectory(prefix=f"exoatom-{dataset.lower()}-") as tmp:
         tmp_dir = Path(tmp)
-        source = Path(args.source) if args.source else download(args.url, tmp_dir / "kurucz-download")
+        source = Path(args.source) if args.source else download(args.url, tmp_dir / f"{dataset.lower()}-download")
 
         if not args.keep_existing:
-            remove_existing_kurucz(data_dir)
+            remove_existing_dataset(data_dir, dataset)
 
-        atoms = []
         if source.is_dir():
-            groups = discover_files_from_dir(source)
-            atoms = process_groups(groups, data_dir, int(args.version), None)
+            groups = discover_files_from_dir(source, dataset)
+            atoms = process_groups(groups, data_dir, dataset, int(args.version), None)
         elif zipfile.is_zipfile(source):
             with zipfile.ZipFile(source) as archive:
-                groups = discover_files_from_archive(archive)
-                atoms = process_groups(groups, data_dir, int(args.version), archive)
+                groups = discover_files_from_archive(archive, dataset)
+                atoms = process_groups(groups, data_dir, dataset, int(args.version), archive)
         else:
             raise SystemExit(f"{source} is not a directory or zip archive.")
 
         if not atoms:
             raise SystemExit("No .states, .trans, or .pf files were found in the source.")
 
-        master = {
-            "ExoAtom": {
-                "ID": Path(args.master).name,
-                "version": str(args.version),
-            },
-            "atoms": atoms,
-        }
-        write_json(root / args.master, master)
-        print(f"Generated {len(atoms)} Kurucz species in {data_dir}.")
+        master_path = root / args.master
+        master = load_master(master_path, args.master, args.version)
+        master["ExoAtom"]["version"] = str(args.version)
+        master["atoms"] = merge_master_atoms(master.get("atoms", []), atoms, dataset)
+        write_json(master_path, master)
+        print(f"Generated {len(atoms)} {dataset} species in {data_dir}.")
 
 
 def download(url, destination):
@@ -119,13 +131,13 @@ def looks_like_google_signin(data):
     return "<html" in head and ("sign in" in head or "accounts.google.com" in head)
 
 
-def discover_files_from_dir(base_dir):
+def discover_files_from_dir(base_dir, dataset):
     groups = defaultdict(dict)
     for path in Path(base_dir).rglob("*"):
         if not path.is_file() or path.suffix.lower() not in {".states", ".trans", ".pf"}:
             continue
 
-        slug, kind = parse_source_file(path.name)
+        slug, kind = parse_source_file(path.name, dataset)
         if not slug:
             print(f"Skipping unrecognized filename: {path}", file=sys.stderr)
             continue
@@ -134,13 +146,13 @@ def discover_files_from_dir(base_dir):
     return groups
 
 
-def discover_files_from_archive(archive):
+def discover_files_from_archive(archive, dataset):
     groups = defaultdict(dict)
     for info in archive.infolist():
         if info.is_dir():
             continue
 
-        slug, kind = parse_source_file(Path(info.filename).name)
+        slug, kind = parse_source_file(Path(info.filename).name, dataset)
         if not slug:
             continue
 
@@ -148,12 +160,13 @@ def discover_files_from_archive(archive):
     return groups
 
 
-def parse_source_file(filename):
-    match = re.match(r"^(?P<slug>.+?)__Kurucz\.(?P<kind>states|trans|pf)$", filename, re.IGNORECASE)
+def parse_source_file(filename, dataset):
+    dataset_pattern = re.escape(dataset)
+    match = re.match(rf"^(?P<slug>.+?)__{dataset_pattern}\.(?P<kind>states|trans|pf)$", filename, re.IGNORECASE)
     if not match:
         return None, None
 
-    slug = match.group("slug")
+    slug = canonical_species_slug(match.group("slug"))
     if not is_valid_species_slug(slug):
         return None, None
 
@@ -161,30 +174,30 @@ def parse_source_file(filename):
 
 
 def is_valid_species_slug(slug):
-    return re.match(r"^[A-Z][a-z]?(?:-[IVXLCDM]+)?$", slug) is not None
+    return re.match(r"^(?:\d+)?[A-Z][a-z]?(?:_[IVXLCDM]+)?$", slug) is not None
 
 
-def remove_existing_kurucz(data_dir):
-    for path in data_dir.glob("*__Kurucz.*"):
+def remove_existing_dataset(data_dir, dataset):
+    for path in data_dir.glob(f"*__{dataset}.*"):
         path.unlink()
 
 
-def process_groups(groups, data_dir, version, archive):
+def process_groups(groups, data_dir, dataset, version, archive):
     atoms = []
     for slug in sorted(groups, key=sort_key):
-        files = copy_group_files(slug, groups[slug], data_dir, archive)
-        definition = build_definition(slug, files, data_dir, version)
-        definition_path = data_dir / f"{slug}__{DATASET}.adef.json"
+        files = copy_group_files(slug, groups[slug], data_dir, dataset, archive)
+        definition = build_definition(slug, files, data_dir, dataset, version)
+        definition_path = data_dir / f"{slug}__{dataset}.adef.json"
         definition["files"]["definition"] = definition_path.name
         write_json(definition_path, definition)
-        atoms.append(build_master_entry(slug, version))
+        atoms.append(build_master_entry(slug, dataset, version))
     return atoms
 
 
-def copy_group_files(slug, source_files, data_dir, archive):
+def copy_group_files(slug, source_files, data_dir, dataset, archive):
     copied = {}
     for kind, source in source_files.items():
-        target = data_dir / f"{slug}__{DATASET}.{kind}"
+        target = data_dir / f"{slug}__{dataset}.{kind}"
         if archive is None:
             shutil.copyfile(source, target)
         else:
@@ -194,8 +207,8 @@ def copy_group_files(slug, source_files, data_dir, archive):
     return copied
 
 
-def build_definition(slug, files, data_dir, version):
-    symbol, stage_number, charge = parse_species_slug(slug)
+def build_definition(slug, files, data_dir, dataset, version):
+    isotope_mass, symbol, stage_number, charge = parse_species_slug(slug)
     states_stats = stats_states(data_dir / files["states"]) if "states" in files else {}
     trans_stats = stats_trans(data_dir / files["trans"]) if "trans" in files else {}
     pf_stats = stats_pf(data_dir / files["pf"]) if "pf" in files else {}
@@ -203,14 +216,14 @@ def build_definition(slug, files, data_dir, version):
     return {
         "species": {
             "atom": symbol,
-            "ordinary_formula": ion_formula(symbol, charge),
+            "ordinary_formula": ion_formula(symbol, charge, isotope_mass),
             "spectroscopic_notation": f"{symbol} {roman(stage_number)}",
             "charge": charge,
             "name": species_name(symbol, charge),
             "mass_in_Da": None,
         },
         "dataset": {
-            "name": DATASET,
+            "name": dataset,
             "version": version,
             "doi": "",
             "max_temperature": pf_stats.get("max_temperature"),
@@ -260,17 +273,18 @@ def build_definition(slug, files, data_dir, version):
     }
 
 
-def build_master_entry(slug, version):
-    symbol, stage_number, charge = parse_species_slug(slug)
+def build_master_entry(slug, dataset, version):
+    isotope_mass, symbol, stage_number, charge = parse_species_slug(slug)
+    formula = base_species_slug(slug)
     return {
         "name": species_name(symbol, charge),
-        "formula": slug,
+        "formula": formula,
         "num_isotopes": 1,
         "isotopes": [
             {
                 "iso_slug": slug,
-                "iso_formula": ion_formula(symbol, charge),
-                "dataset": DATASET,
+                "iso_formula": ion_formula(symbol, charge, isotope_mass),
+                "dataset": dataset,
                 "version": version,
             }
         ],
@@ -333,18 +347,19 @@ def parse_float(columns, index):
 
 
 def base_symbol(slug):
-    return parse_species_slug(slug)[0]
+    return parse_species_slug(slug)[1]
 
 
 def parse_species_slug(slug):
-    match = re.match(r"^(?P<symbol>[A-Z][a-z]?)(?:-(?P<roman>[IVXLCDM]+))?$", slug)
+    match = re.match(r"^(?P<isotope>\d+)?(?P<symbol>[A-Z][a-z]?)(?:_(?P<roman>[IVXLCDM]+))?$", slug)
     if not match:
         raise SystemExit(f"Invalid species slug: {slug}")
 
+    isotope_mass = match.group("isotope")
     symbol = match.group("symbol")
     stage_number = roman_to_int(match.group("roman") or "I")
     charge = stage_number - 1
-    return symbol, stage_number, charge
+    return isotope_mass, symbol, stage_number, charge
 
 
 def species_name(symbol, charge):
@@ -353,49 +368,105 @@ def species_name(symbol, charge):
 
 
 def roman(number):
-    return ROMAN[number] if number < len(ROMAN) else str(number)
+    result = []
+    remaining = number
+    for value, numeral in ROMAN_VALUES:
+        while remaining >= value:
+            result.append(numeral)
+            remaining -= value
+    return "".join(result)
 
 
-def ion_formula(symbol, charge):
+def ion_formula(symbol, charge, isotope_mass=None):
+    formula = f"{isotope_mass or ''}{symbol}"
     if charge <= 0:
-        return symbol
+        return formula
     if charge == 1:
-        return f"{symbol}+"
-    return f"{symbol}{charge}+"
+        return f"{formula}+"
+    return f"{formula}{charge}+"
 
 
 def roman_to_int(value):
-    numerals = {
-        "I": 1,
-        "II": 2,
-        "III": 3,
-        "IV": 4,
-        "V": 5,
-        "VI": 6,
-        "VII": 7,
-        "VIII": 8,
-        "IX": 9,
-        "X": 10,
-        "XI": 11,
-        "XII": 12,
-        "XIII": 13,
-        "XIV": 14,
-        "XV": 15,
-        "XVI": 16,
-        "XVII": 17,
-        "XVIII": 18,
-        "XIX": 19,
-        "XX": 20,
-    }
-    try:
-        return numerals[value]
-    except KeyError:
+    index = 0
+    total = 0
+    for amount, numeral in ROMAN_VALUES:
+        while value[index:index + len(numeral)] == numeral:
+            total += amount
+            index += len(numeral)
+            if index >= len(value):
+                return total
+
+    if index != len(value):
         raise SystemExit(f"Unsupported ionization stage: {value}")
+    return total
 
 
 def sort_key(slug):
-    symbol, stage_number, _ = parse_species_slug(slug)
-    return (ELEMENT_ORDER.get(symbol, 999), stage_number, slug)
+    isotope_mass, symbol, stage_number, _ = parse_species_slug(slug)
+    isotope_order = int(isotope_mass) if isotope_mass else 0
+    return (ELEMENT_ORDER.get(symbol, 999), stage_number, isotope_order, slug)
+
+
+def canonical_species_slug(slug):
+    return slug.replace("-", "_")
+
+
+def base_species_slug(slug):
+    isotope_mass, symbol, stage_number, _ = parse_species_slug(slug)
+    return f"{symbol}_{roman(stage_number)}"
+
+
+def load_master(path, master_name, version):
+    if path.exists():
+        return json.loads(path.read_text(encoding="utf-8"))
+
+    return {
+        "ExoAtom": {
+            "ID": Path(master_name).name,
+            "version": str(version),
+        },
+        "atoms": [],
+    }
+
+
+def merge_master_atoms(existing_atoms, new_atoms, dataset):
+    merged = {}
+
+    for atom in existing_atoms:
+        atom = dict(atom)
+        atom["formula"] = canonical_species_slug(atom["formula"])
+        atom["isotopes"] = [
+            normalize_isotope_entry(isotope)
+            for isotope in atom.get("isotopes", [])
+            if isotope.get("dataset") != dataset
+        ]
+        if atom["isotopes"]:
+            merged[atom["formula"]] = atom
+
+    for atom in new_atoms:
+        formula = atom["formula"]
+        target = merged.setdefault(formula, {
+            "name": atom["name"],
+            "formula": formula,
+            "num_isotopes": 0,
+            "isotopes": [],
+        })
+        target["name"] = atom["name"]
+        for isotope in atom.get("isotopes", []):
+            target["isotopes"].append(normalize_isotope_entry(isotope))
+
+    atoms = []
+    for atom in sorted(merged.values(), key=lambda item: sort_key(item["formula"])):
+        atom["isotopes"] = sorted(atom["isotopes"], key=lambda isotope: (isotope["dataset"], sort_key(isotope["iso_slug"])))
+        atom["num_isotopes"] = len({isotope["iso_slug"] for isotope in atom["isotopes"]})
+        atoms.append(atom)
+    return atoms
+
+
+def normalize_isotope_entry(isotope):
+    isotope = dict(isotope)
+    isotope["iso_slug"] = canonical_species_slug(isotope["iso_slug"])
+    return isotope
 
 
 def write_json(path, data):

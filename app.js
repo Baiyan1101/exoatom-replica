@@ -1,5 +1,6 @@
 const MASTER_INDEX_URL = "exoatom.all.json";
 const DATA_DIR = "data";
+const FILE_PREVIEW_LIMIT = 2 * 1024 * 1024;
 
 const ELEMENTS = [
   ["H", "Hydrogen", 1, 1], ["He", "Helium", 1, 18],
@@ -108,16 +109,27 @@ async function showDatasets(speciesSlug, isotopeSlug = "") {
   try {
     const index = await getMasterIndex();
     const atom = findAtomBySlug(index.atoms || [], speciesSlug);
+    const normalizedIsotopeSlug = normalizeFormulaSlug(isotopeSlug);
+    const canonicalSpeciesSlug = canonicalFormulaSlug(speciesSlug);
+    const canonicalIsotopeSlug = isotopeSlug ? canonicalFormulaSlug(isotopeSlug) : "";
 
     if (!atom) {
       renderMessage(`No datasets found for ${speciesSlug}.`);
       return;
     }
 
+    if (speciesSlug !== canonicalSpeciesSlug || isotopeSlug !== canonicalIsotopeSlug) {
+      const params = new URLSearchParams({ qf: canonicalFormulaSlug(atom.formula) });
+      if (canonicalIsotopeSlug) {
+        params.set("iso", canonicalIsotopeSlug);
+      }
+      history.replaceState({}, "", `${location.pathname}?${params}`);
+    }
+
     speciesInput.value = atom.formula;
     resultsList.innerHTML = `<h2>${escapeHtml(speciesTitle(atom))}</h2>`;
     const isotopes = isotopeSlug
-      ? (atom.isotopes || []).filter((isotope) => isotope.iso_slug === isotopeSlug)
+      ? (atom.isotopes || []).filter((isotope) => normalizeFormulaSlug(isotope.iso_slug) === normalizedIsotopeSlug)
       : atom.isotopes || [];
 
     if (isotopeSlug && isotopes.length === 0) {
@@ -262,12 +274,10 @@ async function showFileViewer(fileUrl, label) {
   resultsList.querySelector("button").addEventListener("click", () => history.back());
 
   try {
-    const response = await fetch(fileUrl);
-    if (!response.ok) {
-      throw new Error(`Could not load ${fileUrl}.`);
-    }
-    const text = await response.text();
-    resultsList.querySelector("pre").textContent = text;
+    const { text, truncated, size } = await fetchFilePreview(fileUrl);
+    resultsList.querySelector("pre").textContent = truncated
+      ? `${text}\n\n[Preview truncated at ${formatBytes(FILE_PREVIEW_LIMIT)} of ${formatBytes(size)}.]`
+      : text;
   } catch (error) {
     resultsList.querySelector("pre").textContent = error.message;
   }
@@ -294,8 +304,8 @@ function findSpecies(atoms, query, includeAllStages) {
 }
 
 function findAtomBySlug(atoms, speciesSlugValue) {
-  const normalized = normalizeQuery(speciesSlugValue);
-  return atoms.find((atom) => normalizeQuery(atom.formula) === normalized || normalizeQuery(displayFormula(atom.formula)) === normalized);
+  const normalized = normalizeFormulaSlug(speciesSlugValue);
+  return atoms.find((atom) => normalizeFormulaSlug(atom.formula) === normalized || normalizeSpectroscopic(displayFormula(atom.formula)) === normalizeSpectroscopic(speciesSlugValue));
 }
 
 function navigateToSpecies(symbol) {
@@ -305,16 +315,16 @@ function navigateToSpecies(symbol) {
 }
 
 function navigateToDatasets(formula, isotopeSlug = "") {
-  const params = new URLSearchParams({ qf: formula });
+  const params = new URLSearchParams({ qf: canonicalFormulaSlug(formula) });
   if (isotopeSlug) {
-    params.set("iso", isotopeSlug);
+    params.set("iso", canonicalFormulaSlug(isotopeSlug));
   }
   history.pushState({}, "", `${location.pathname}?${params}`);
   showDatasets(formula, isotopeSlug);
 }
 
 async function loadDefinition(isotope) {
-  const filename = `${isotope.iso_slug}__${isotope.dataset}.adef.json`;
+  const filename = `${canonicalFormulaSlug(isotope.iso_slug)}__${isotope.dataset}.adef.json`;
   return fetchJson(`${DATA_DIR}/${filename}`);
 }
 
@@ -356,13 +366,45 @@ function fileDescription(type, definition) {
 
 async function updateFileSize(url, anchor) {
   try {
-    const response = await fetch(url);
-    if (!response.ok) return;
-    const blob = await response.blob();
-    anchor.insertAdjacentText("afterend", ` [${formatBytes(blob.size)}]`);
+    const size = await getFileSize(url);
+    if (Number.isFinite(size) && size > 0) {
+      anchor.insertAdjacentText("afterend", ` [${formatBytes(size)}]`);
+    }
   } catch {
     // Size is helpful but not required for rendering.
   }
+}
+
+async function fetchFilePreview(url) {
+  const size = await getFileSize(url);
+  const isLarge = Number.isFinite(size) && size > FILE_PREVIEW_LIMIT;
+  const headers = isLarge ? { Range: `bytes=0-${FILE_PREVIEW_LIMIT - 1}` } : {};
+  const response = await fetch(url, { headers });
+
+  if (!response.ok && response.status !== 206) {
+    throw new Error(`Could not load ${url}.`);
+  }
+
+  if (isLarge && response.status !== 206) {
+    return {
+      text: "This file is too large to preview safely, and the server did not return a byte range.",
+      truncated: false,
+      size
+    };
+  }
+
+  const buffer = await response.arrayBuffer();
+  return {
+    text: new TextDecoder("utf-8").decode(buffer),
+    truncated: isLarge,
+    size: Number.isFinite(size) ? size : buffer.byteLength
+  };
+}
+
+async function getFileSize(url) {
+  const response = await fetch(url, { method: "HEAD" });
+  if (!response.ok) return NaN;
+  return Number(response.headers.get("content-length"));
 }
 
 function datasetDescription(datasetName) {
@@ -414,7 +456,7 @@ function baseElement(formula) {
 }
 
 function displayFormula(formula) {
-  return String(formula).replaceAll("-", " ");
+  return String(formula).replace(/[-_]+/g, " ");
 }
 
 function speciesTitle(atom) {
@@ -488,10 +530,15 @@ function isotopeBaseFormula(formula) {
 }
 
 function formulaHtml(formula) {
-  return escapeHtml(formula)
-    .replace(/^(\d+)([A-Z][a-z]?)/, "<sup>$1</sup>$2")
-    .replace(/^([A-Z][a-z]?)(\d+)\+$/, "$1<sup>$2+</sup>")
-    .replace(/^([A-Z][a-z]?)\+$/, "$1<sup>+</sup>");
+  const match = String(formula).match(/^(\d+)?([A-Z][a-z]?)(?:(\d+)?\+)?$/);
+  if (!match) {
+    return escapeHtml(formula);
+  }
+
+  const [, mass, symbol, charge] = match;
+  const massHtml = mass ? `<sup>${escapeHtml(mass)}</sup>` : "";
+  const chargeHtml = formula.endsWith("+") ? `<sup>${escapeHtml(charge || "")}+</sup>` : "";
+  return `${massHtml}${escapeHtml(symbol)}${chargeHtml}`;
 }
 
 function speciesSummary(species) {
@@ -515,41 +562,24 @@ function spectroscopicLabel(formula) {
 }
 
 function ionStage(formula) {
-  return String(formula).includes("-") ? String(formula).split("-")[1] : "I";
+  const match = String(formula).match(/[-_]([IVXLCDM]+)$/);
+  return match ? match[1] : "I";
 }
 
 function ionStageNumber(formula) {
-  const numerals = {
-    I: 1,
-    II: 2,
-    III: 3,
-    IV: 4,
-    V: 5,
-    VI: 6,
-    VII: 7,
-    VIII: 8,
-    IX: 9,
-    X: 10,
-    XI: 11,
-    XII: 12,
-    XIII: 13,
-    XIV: 14,
-    XV: 15,
-    XVI: 16,
-    XVII: 17,
-    XVIII: 18,
-    XIX: 19,
-    XX: 20
-  };
-  return numerals[ionStage(formula)] || 1;
+  return romanToInt(ionStage(formula)) || 1;
 }
 
 function normalizeQuery(value) {
-  return String(value).trim().toLowerCase().replace(/\s+/g, "").replaceAll("-", "");
+  return String(value).trim().toLowerCase().replace(/\s+/g, "").replace(/[-_]+/g, "");
 }
 
 function normalizeFormulaSlug(value) {
-  return String(value).trim().toLowerCase().replace(/\s+/g, "-").replace(/_+/g, "-");
+  return String(value).trim().toLowerCase().replace(/\s+/g, "_").replace(/-+/g, "_");
+}
+
+function canonicalFormulaSlug(value) {
+  return String(value).trim().replace(/\s+/g, "_").replace(/-+/g, "_");
 }
 
 function normalizeSymbol(value) {
@@ -558,6 +588,36 @@ function normalizeSymbol(value) {
 
 function normalizeSpectroscopic(value) {
   return String(value).trim().toLowerCase().replace(/[-_]+/g, " ").replace(/\s+/g, " ");
+}
+
+function romanToInt(value) {
+  const numerals = [
+    [1000, "M"],
+    [900, "CM"],
+    [500, "D"],
+    [400, "CD"],
+    [100, "C"],
+    [90, "XC"],
+    [50, "L"],
+    [40, "XL"],
+    [10, "X"],
+    [9, "IX"],
+    [5, "V"],
+    [4, "IV"],
+    [1, "I"]
+  ];
+  let index = 0;
+  let total = 0;
+  const roman = String(value).toUpperCase();
+
+  for (const [amount, numeral] of numerals) {
+    while (roman.slice(index, index + numeral.length) === numeral) {
+      total += amount;
+      index += numeral.length;
+    }
+  }
+
+  return index === roman.length ? total : 0;
 }
 
 function formatBytes(bytes) {
