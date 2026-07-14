@@ -402,7 +402,7 @@ async function fetchFilePreview(url) {
 }
 
 async function getFileSize(url) {
-  const response = await fetch(url, { method: "HEAD" });
+  const response = await fetch(url, { method: "HEAD", cache: "no-store" });
   if (!response.ok) return NaN;
   return Number(response.headers.get("content-length"));
 }
@@ -420,7 +420,7 @@ function datasetDescription(datasetName) {
 }
 
 async function fetchJson(url) {
-  const response = await fetch(url);
+  const response = await fetch(url, { cache: "no-store" });
   if (!response.ok) {
     throw new Error(`Could not load ${url}. Run a local web server and check that the file exists.`);
   }
